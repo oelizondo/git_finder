@@ -17,7 +17,7 @@ gulp.task('compilejs', function(){
 });
 
 gulp.task('watch', function(){
-	gulp.watch('./', ['compilejs', 'uglify']);
+	gulp.watch('src/*.coffee', ['compilejs']);
 });
 
 gulp.task('default', ['compilejs', 'watch']);
