@@ -1,18 +1,20 @@
 var gulp 	= require('gulp'),
 	uglify 	= require('gulp-uglify'),
 	coffee	= require('gulp-coffee'),
-	gutil	= require('gulp-util');
+	plumber = require('gulp-plumber')
 
 
 gulp.task('uglify', function(){
 	gulp.src('src/js/*.js')
+	.pipe(plumber())
 	.pipe(uglify())
 	.pipe(gulp.dest('src/js'));
 });	
 
 gulp.task('compilejs', function(){
 	gulp.src('src/*.coffee')
-	.pipe(coffee({bare: true}).on('error', gutil.log))
+	.pipe(plumber())
+	.pipe(coffee({bare: true}).on('error', console.log))
 	.pipe(gulp.dest('src/js'));
 });
 

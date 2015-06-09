@@ -1,18 +1,20 @@
 var User;
 
 User = (function() {
-  var BASE_URL;
+  var BASE_URL, Users;
 
-  BASE_URL = 'http://api.github.com/users/';
+  BASE_URL = 'http://api.github.com/users';
+
+  Users = [];
 
   function User(attributes) {
     if (attributes == null) {
       attributes = {};
     }
     this.name = attributes.name;
-    this.meail = attributes.email;
-    this.location = attributes.location;
     this.username = attributes.login;
+    this.email = attributes.email;
+    this.location = attributes.location;
     this.reposUrl = attributes.repos_url;
   }
 
@@ -20,13 +22,30 @@ User = (function() {
     var user;
     user = null;
     return $.ajax({
-      url: "" + BASE_URL + username,
+      url: BASE_URL + "/" + username,
       type: 'GET',
       success: function(data) {
-        console.log(data);
         user = new User(data);
         if (callback) {
           return callback(user);
+        }
+      }
+    });
+  };
+
+  User.fetchAllUsers = function(callback) {
+    return $.ajax({
+      type: 'GET',
+      url: BASE_URL,
+      success: function(data) {
+        var i, len, newUser, user;
+        for (i = 0, len = data.length; i < len; i++) {
+          user = data[i];
+          newUser = new User(user);
+          Users.push(newUser);
+        }
+        if (callback) {
+          return callback(Users);
         }
       }
     });
