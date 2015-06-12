@@ -40,7 +40,7 @@ Installation:
 			user = data;
 		});
 
-		Fetching all users: returns an array of 100 users.
+		Fetching all users: returns an array of 100 users at a time.
 		.fetchAllUsers(function(data){
 			users = data;
 		});
@@ -75,12 +75,12 @@ Installation:
 
 	Methods for Repositories:
 
-		Fetching a single Repository, username and repository name should be included, since there is not 'loose' repository hunting.
+		Fetching a single Repository, username and repository name should be included, since there is no 'loose' repository hunting.
 		.fetchRepo('username','reponame', function(data){
 			repo = data;
 		});
 
-		Fetching all public repositories: returns a list of public repositories, keep in mind that attributes of the public list and user list are differente and some methods do not work parallely.
+		Fetching all public repositories: returns a list of public repositories, keep in mind that attributes of the public list and user list are different and some methods do not work parallely.
 		.fetchAllRepos(function(data){
 			repos = data;
 		});

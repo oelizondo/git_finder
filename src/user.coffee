@@ -1,8 +1,10 @@
 class User
 	BASE_URL = 'http://api.github.com/users'
 	Users = []
+	CURRENTLASTID = 0
 	constructor: (attributes={}) ->
 		@name = attributes.name
+		@id = attributes.id
 		@username = attributes.login
 		@email = attributes.email
 		@location = attributes.location
@@ -21,10 +23,11 @@ class User
 	@fetchAllUsers: (callback) ->
 		$.ajax({
 			type: 'GET'
-			url: BASE_URL
+			url: "#{BASE_URL}?since=#{CURRENTLASTID}"
 			success: (data) ->
 				for user in data
 					newUser = new User(user)
 					Users.push(newUser)
+				CURRENTLASTID = Users.length-1
 				callback(Users) if callback
 		})

@@ -2,6 +2,7 @@ class Repo
 	BASE_URL = "http://api.github.com/repos"
 	PUBLIC_REPOS = "https://api.github.com/repositories"
 	Repos = []
+	CURRENTLASTREPO = 0
 	constructor: (attributes={}) ->
 		@name = attributes.full_name
 		@url = attributes.url
@@ -26,5 +27,6 @@ class Repo
 				for repo in data
 					newRepo = new Repo(repo)
 					Repos.push(newRepo)
+				CURRENTLASTREPO = Repos.length-1
 				callback(Repos) if callback
 		})

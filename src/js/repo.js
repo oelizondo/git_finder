@@ -1,13 +1,15 @@
 var Repo;
 
 Repo = (function() {
-  var BASE_URL, PUBLIC_REPOS, Repos;
+  var BASE_URL, CURRENTLASTREPO, PUBLIC_REPOS, Repos;
 
   BASE_URL = "http://api.github.com/repos";
 
   PUBLIC_REPOS = "https://api.github.com/repositories";
 
   Repos = [];
+
+  CURRENTLASTREPO = 0;
 
   function Repo(attributes) {
     if (attributes == null) {
@@ -45,6 +47,7 @@ Repo = (function() {
           newRepo = new Repo(repo);
           Repos.push(newRepo);
         }
+        CURRENTLASTREPO = Repos.length - 1;
         if (callback) {
           return callback(Repos);
         }

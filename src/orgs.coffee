@@ -25,8 +25,10 @@ class Org
 			type: 'GET'
 			url: "#{USER_ORGS}#{username}/orgs"
 			success: (data) ->
+				orgArr = []
 				for org in data
 					newOrg = new Org(org)
-					Orgs.push(newOrg)
+					orgArr.push(newOrg)
+				Orgs.push(orgArr)
 				callback(Orgs) if callback
 		})

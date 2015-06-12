@@ -40,12 +40,14 @@ Org = (function() {
       type: 'GET',
       url: "" + USER_ORGS + username + "/orgs",
       success: function(data) {
-        var i, len, newOrg, org;
+        var i, len, newOrg, org, orgArr;
+        orgArr = [];
         for (i = 0, len = data.length; i < len; i++) {
           org = data[i];
           newOrg = new Org(org);
-          Orgs.push(newOrg);
+          orgArr.push(newOrg);
         }
+        Orgs.push(orgArr);
         if (callback) {
           return callback(Orgs);
         }

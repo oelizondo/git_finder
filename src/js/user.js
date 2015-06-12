@@ -1,17 +1,20 @@
 var User;
 
 User = (function() {
-  var BASE_URL, Users;
+  var BASE_URL, CURRENTLASTID, Users;
 
   BASE_URL = 'http://api.github.com/users';
 
   Users = [];
+
+  CURRENTLASTID = 0;
 
   function User(attributes) {
     if (attributes == null) {
       attributes = {};
     }
     this.name = attributes.name;
+    this.id = attributes.id;
     this.username = attributes.login;
     this.email = attributes.email;
     this.location = attributes.location;
@@ -36,7 +39,7 @@ User = (function() {
   User.fetchAllUsers = function(callback) {
     return $.ajax({
       type: 'GET',
-      url: BASE_URL,
+      url: BASE_URL + "?since=" + CURRENTLASTID,
       success: function(data) {
         var i, len, newUser, user;
         for (i = 0, len = data.length; i < len; i++) {
@@ -44,6 +47,7 @@ User = (function() {
           newUser = new User(user);
           Users.push(newUser);
         }
+        CURRENTLASTID = Users.length - 1;
         if (callback) {
           return callback(Users);
         }
