@@ -39,7 +39,7 @@ Repo = (function() {
   Repo.fetchAllRepos = function(callback) {
     return $.ajax({
       type: 'GET',
-      url: PUBLIC_REPOS,
+      url: PUBLIC_REPOS + "?since=" + CURRENTLASTREPO,
       success: function(data) {
         var i, len, newRepo, repo;
         for (i = 0, len = data.length; i < len; i++) {

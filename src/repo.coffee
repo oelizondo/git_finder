@@ -22,7 +22,7 @@ class Repo
 	@fetchAllRepos: (callback) ->
 		$.ajax({
 			type: 'GET'
-			url: PUBLIC_REPOS
+			url: "#{PUBLIC_REPOS}?since=#{CURRENTLASTREPO}"
 			success: (data) ->
 				for repo in data
 					newRepo = new Repo(repo)
